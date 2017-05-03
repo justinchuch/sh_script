@@ -1,0 +1,22 @@
+# Rename and place this file at ~/.ssh/config
+
+# Re-use existing connections instead of opening new ones
+ControlMaster auto
+ControlPath /tmp/ssh_mux_%h_%p_%r_%l
+
+# define host and key using
+
+# ssh key for justin1 on github
+Host github_justin1
+	User git
+	Hostname github.com
+	IdentityFile ~/.ssh/github_justin1/id_rsa
+	# for macos: use keychain
+	UseKeychain yes
+	AddKeysToAgent yes
+
+# For ssh remote login to mynas
+Host mynas
+	Hostname 192.168.0.10
+	IdentityFile ~/.ssh/mynas/id_rsa
+	User justin1

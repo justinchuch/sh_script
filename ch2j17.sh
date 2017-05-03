@@ -1,5 +1,5 @@
 #!/bin/sh
-# Change Java Home for the current Terminal session
+# for macos use
 echo Please run using: source ch2j17.sh
 /usr/libexec/java_home -V
 export JAVA_HOME=`/usr/libexec/java_home -v 1.7*`
