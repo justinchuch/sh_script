@@ -64,7 +64,7 @@ yellow=$(tput setaf 3)
 high_yellow="\033[38;5;11m"
 cyan=$(tput setaf 6)
 reset=$(tput sgr0)
-export PS1='\[$cyan\]\u\[$reset\]@\[$reset\]\h\[$reset\]:'${high_yellow}'\w\[$green\]`parse_git_branch`\[$reset\]\\$ '
+export PS1='\[$cyan\]\u\[$reset\]@\[$reset\]\h\[$reset\]:\['${high_yellow}'\]\w\[$green\]`parse_git_branch`\[$reset\] > '
 
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
