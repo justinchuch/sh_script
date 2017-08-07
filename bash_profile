@@ -48,6 +48,15 @@ function parse_git_dirty {
   fi
 }
 
+#
+function is_ssh_client {
+  if [ -n "$SSH_CLIENT" ]; then
+    echo "remote"
+  else
+    echo "local"
+  fi
+}
+
 # tput color
 # Black = 0
 # Red = 1
@@ -64,7 +73,7 @@ yellow=$(tput setaf 3)
 high_yellow="\033[38;5;11m"
 cyan=$(tput setaf 6)
 reset=$(tput sgr0)
-export PS1='\[$cyan\]\u\[$reset\]@\[$reset\]\h\[$reset\]:\['${high_yellow}'\]\w\[$green\]`parse_git_branch`\[$reset\]> '
+export PS1='\[$cyan\]\u\[$reset\]@\[$reset\]`is_ssh_client`:\h\[$reset\]:\['${high_yellow}'\]\w\[$green\]`parse_git_branch`\[$reset\]> '
 
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
@@ -86,3 +95,23 @@ function setTTitle {
 
 # github access token
 export HOMEBREW_GITHUB_API_TOKEN=
+
+
+# reference from stackoverflow
+# tidy up PATH variables, remove duplicates
+if [ -n "$PATH" ]; then
+  old_PATH=$PATH:; PATH=
+  while [ -n "$old_PATH" ]; do
+    x=${old_PATH%%:*}
+    case $PATH: in
+      *:"$x":*) ;;
+      *) PATH=$PATH:$x;;
+    esac
+    old_PATH=${old_PATH#*:}
+  done
+  PATH=${PATH#:}
+  unset old_PATH x
+  echo $PATH
+fi
+
+export PATH
